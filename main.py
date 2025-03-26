@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 from wordcloud import WordCloud
+import gdown
 
 # Konfigurasi dashboard
 st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
@@ -12,8 +13,12 @@ st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
 st.title("📊 **E-Commerce Data Dashboard**")
 
 # Load data
-@st.cache_data
 def load_data():
+    file_id = "1BnsqMsDFyWjpEFgfB_aG_2yeIAPcg0OG" 
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    
+    gdown.download(url, "ecommerce_cleaned_data.csv", quiet=False)
+
     df = pd.read_csv("ecommerce_cleaned_data.csv")
     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
     df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
