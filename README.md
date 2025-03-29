@@ -3,7 +3,7 @@
 ## Description
 This project is an e-commerce data analysis dashboard created using Streamlit. This dashboard allows users to analyze sales data, including key statistics, trends, and visualizations.
 
-## Criteria
+## Requirements
 - Python 3.x
 - Streamlit
 - Pandas
@@ -47,5 +47,3 @@ The application will open in your browser, usually at the address `http://localh
 
 ## Contributed
 deployed by Risqienurilman
-
-Translated with DeepL.com (free version)
