@@ -11,10 +11,19 @@ st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
 # Judul Dashboard
 st.title("📊 **E-Commerce Data Dashboard**")
 
+# URL Google Drive dataset
+GDRIVE_URL = "https://drive.google.com/uc?id=1CcGe4N8bFT0hi6C14yajZyl6q-V7KT9y"
+DATASET_PATH = "ecommerce_cleaned_data.csv"
+
+# Download dataset dari Google Drive jika belum ada
+if not os.path.exists(DATASET_PATH):
+    with st.spinner("Mengunduh dataset dari Google Drive..."):
+        gdown.download(GDRIVE_URL, DATASET_PATH, quiet=False)
+
 # Load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv("ecommerce_cleaned_data.csv")
+    df = pd.read_csv(DATASET_PATH)
     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
     df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
     df["month"] = df["order_purchase_timestamp"].dt.month
