@@ -1,32 +1,49 @@
-# 📊 E-Commerce Data Dashboard
+# E-Commerce Dashboard 📊
 
-🚀 **Dashboard interaktif untuk menganalisis data transaksi e-commerce menggunakan Streamlit, Pandas, Matplotlib, dan Plotly.**  
-Dashboard ini memungkinkan pengguna untuk mengeksplorasi tren pesanan, analisis rating pelanggan, hubungan pembayaran dengan ulasan, serta kategori produk terlaris.
+## Deskripsi
+Proyek ini adalah dashboard analisis data e-commerce yang dibuat menggunakan Streamlit. Dashboard ini memungkinkan pengguna untuk menganalisis data penjualan, termasuk statistik utama, tren, dan visualisasi.
 
----
+## Kriteria
+- Python 3.x
+- Streamlit
+- Pandas
+- Matplotlib
+- Seaborn
+- Plotly
+- WordCloud
+- gdown
 
-## 🎯 **Fitur Utama**
-✅ **Filter Interaktif**:  
-   - Filter berdasarkan bulan transaksi  
-   - Pilihan kategori produk  
-   - Slider untuk rentang harga pembayaran  
+## Setup Environment
 
-✅ **Visualisasi Data**:  
-   - **Line Chart** Tren Volume Pesanan 📈  
-   - **Bar Chart** Top 10 Produk Terlaris 🔥  
-   - **Box Plot** Hubungan Pembayaran & Rating 💰  
-   - **Word Cloud** untuk kategori produk 🔠  
-   - **Heatmap** korelasi variabel 📊  
+### 1. Menggunakan Anaconda
+Jika Anda menggunakan Anaconda sebagai manajer lingkungan, gunakan perintah berikut:
 
-✅ **Statistik Utama (KPI Metrics)**:  
-   - Total pesanan 📦  
-   - Rata-rata pembayaran 💵  
-   - Rata-rata rating ⭐  
-
----
-
-## 🔧 **Instalasi & Cara Menjalankan**
-### **1️⃣ Clone Repository**
 ```bash
-git clone https://github.com/username/ecommerce-dashboard.git
+conda create --name ecommerce-dashboard python=3.9
+conda activate ecommerce-dashboard
+pip install -r requirements.txt
+```
+
+### 2. Menggunakan Shell/Terminal
+Jika Anda menggunakan terminal atau shell biasa, ikuti langkah-langkah ini:
+
+```bash
+mkdir ecommerce-dashboard
 cd ecommerce-dashboard
+python -m venv venv
+source venv/bin/activate  # di Windows gunakan venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## Menjalankan Dashboard
+
+Setelah Anda mengatur lingkungan dan menginstal dependensi, Anda dapat menjalankan aplikasi Streamlit dengan perintah berikut:
+
+```bash
+streamlit run main.py
+```
+
+Aplikasi akan terbuka di browser Anda, biasanya pada alamat `http://localhost:8501`.
+
+## Kontribusi
+deployed by Risqienurilman
