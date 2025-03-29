@@ -1,9 +1,9 @@
 # E-Commerce Dashboard 📊
 
-## Deskripsi
-Proyek ini adalah dashboard analisis data e-commerce yang dibuat menggunakan Streamlit. Dashboard ini memungkinkan pengguna untuk menganalisis data penjualan, termasuk statistik utama, tren, dan visualisasi.
+## Description
+This project is an e-commerce data analysis dashboard created using Streamlit. This dashboard allows users to analyze sales data, including key statistics, trends, and visualizations.
 
-## Kriteria
+## Criteria
 - Python 3.x
 - Streamlit
 - Pandas
@@ -15,35 +15,37 @@ Proyek ini adalah dashboard analisis data e-commerce yang dibuat menggunakan Str
 
 ## Setup Environment
 
-### 1. Menggunakan Anaconda
-Jika Anda menggunakan Anaconda sebagai manajer lingkungan, gunakan perintah berikut:
+### Using Anaconda
+If you are using Anaconda as your environment manager, use the following command:
 
-```bash
+``bash
 conda create --name ecommerce-dashboard python=3.9
 conda activate ecommerce-dashboard
 pip install -r requirements.txt
 ```
 
-### 2. Menggunakan Shell/Terminal
-Jika Anda menggunakan terminal atau shell biasa, ikuti langkah-langkah ini:
+### Using Shell/Terminal
+If you are using a regular terminal or shell, follow these steps:
 
 ```bash
 mkdir ecommerce-dashboard
 cd ecommerce-dashboard
 python -m venv venv
-source venv/bin/activate  # di Windows gunakan venv\Scripts\activate
+source venv/bin/activate # on Windows use venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Menjalankan Dashboard
+## Running the Dashboard
 
-Setelah Anda mengatur lingkungan dan menginstal dependensi, Anda dapat menjalankan aplikasi Streamlit dengan perintah berikut:
+Once you have set up the environment and installed the dependencies, you can run the Streamlit application with the following command:
 
 ```bash
 streamlit run main.py
 ```
 
-Aplikasi akan terbuka di browser Anda, biasanya pada alamat `http://localhost:8501`.
+The application will open in your browser, usually at the address `http://localhost:8501`.
 
-## Kontribusi
+## Contributed
 deployed by Risqienurilman
+
+Translated with DeepL.com (free version)
