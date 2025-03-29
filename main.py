@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 from wordcloud import WordCloud
+import gdown
 
 # Konfigurasi dashboard
 st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
