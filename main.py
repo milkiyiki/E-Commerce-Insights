@@ -6,10 +6,11 @@ import plotly.express as px
 from wordcloud import WordCloud
 
 # Konfigurasi dashboard
- st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
- @@ -12,29 +13,33 @@
- st.title("📊 **E-Commerce Data Dashboard**")
- 
+st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
+
+# Judul Dashboard
+st.title("📊 **E-Commerce Data Dashboard**")
+
  # Load data
  @st.cache_data
  def load_data():
