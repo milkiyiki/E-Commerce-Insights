@@ -11,20 +11,20 @@ st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
 # Judul Dashboard
 st.title("📊 **E-Commerce Data Dashboard**")
 
- # Load data
- @st.cache_data
- def load_data():
-     file_id = "1BnsqMsDFyWjpEFgfB_aG_2yeIAPcg0OG" 
-     url = f"https://drive.google.com/uc?export=download&id={file_id}"
+# Load data
+@st.cache_data
+def load_data():
+    file_id = "1BnsqMsDFyWjpEFgfB_aG_2yeIAPcg0OG" 
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
      
-     gdown.download(url, "ecommerce_cleaned_data.csv", quiet=False)
+    gdown.download(url, "ecommerce_cleaned_data.csv", quiet=False)
  
-     df = pd.read_csv("ecommerce_cleaned_data.csv")
-     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
-     df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
-     return df
+    df = pd.read_csv("ecommerce_cleaned_data.csv")
+    df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
+    df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
+    return df
  
- df = load_data()
+df = load_data()
 
 # Sidebar - Filter
 st.sidebar.header("📌 **Filter Data**")
