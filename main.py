@@ -6,26 +6,24 @@ import plotly.express as px
 from wordcloud import WordCloud
 
 # Konfigurasi dashboard
-st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
-
-# Judul Dashboard
-st.title("📊 **E-Commerce Data Dashboard**")
-
-# URL Google Drive dataset
-GDRIVE_URL = "https://drive.google.com/uc?id=1CcGe4N8bFT0hi6C14yajZyl6q-V7KT9y"
-DATASET_PATH = "ecommerce_cleaned_data.csv"
-
-# Load data
-@st.cache_data
-def load_data():
-    df = pd.read_csv(DATASET_PATH)
-    df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
-    df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
-    df["month"] = df["order_purchase_timestamp"].dt.month
-    df["year"] = df["order_purchase_timestamp"].dt.year
-    return df
-
-df = load_data()
+ st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
+ @@ -12,29 +13,33 @@
+ st.title("📊 **E-Commerce Data Dashboard**")
+ 
+ # Load data
+ @st.cache_data
+ def load_data():
+     file_id = "1BnsqMsDFyWjpEFgfB_aG_2yeIAPcg0OG" 
+     url = f"https://drive.google.com/uc?export=download&id={file_id}"
+     
+     gdown.download(url, "ecommerce_cleaned_data.csv", quiet=False)
+ 
+     df = pd.read_csv("ecommerce_cleaned_data.csv")
+     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
+     df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
+     return df
+ 
+ df = load_data()
 
 # Sidebar - Filter
 st.sidebar.header("📌 **Filter Data**")
