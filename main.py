@@ -15,11 +15,6 @@ st.title("📊 **E-Commerce Data Dashboard**")
 GDRIVE_URL = "https://drive.google.com/uc?id=1CcGe4N8bFT0hi6C14yajZyl6q-V7KT9y"
 DATASET_PATH = "ecommerce_cleaned_data.csv"
 
-# Download dataset dari Google Drive jika belum ada
-if not os.path.exists(DATASET_PATH):
-    with st.spinner("Mengunduh dataset dari Google Drive..."):
-        gdown.download(GDRIVE_URL, DATASET_PATH, quiet=False)
-
 # Load data
 @st.cache_data
 def load_data():
