@@ -40,7 +40,7 @@ pip install -r requirements.txt
 Once you have set up the environment and installed the dependencies, you can run the Streamlit application with the following command:
 
 ```bash
-streamlit run main.py
+streamlit run ecommerce.py
 ```
 
 The application will open in your browser, usually at the address `http://localhost:8501`.
