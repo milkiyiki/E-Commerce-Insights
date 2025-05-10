@@ -4,8 +4,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 from wordcloud import WordCloud
-import gdown
-import os
 
 # Konfigurasi dashboard
 st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
@@ -16,38 +14,52 @@ st.title("📊 **E-Commerce Data Dashboard**")
 # Load data
 @st.cache_data
 def load_data():
-    # URL file CSV dari Google Drive
-    gdrive_url = 'https://drive.google.com/uc?id=1yVmRLqssLDDnxPnRGzrjvELuZ4u49Gvx'
-    output_file = 'ecommerce_cleaned_data.csv'
-    
-    # Mengunduh file dari Google Drive
-    gdown.download(gdrive_url, output_file, quiet=False)
-
-    # Memuat data ke DataFrame
-    df = pd.read_csv(output_file)
+    df = pd.read_csv("ecommerce_cleaned_data.csv")
     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
     df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
     df["month"] = df["order_purchase_timestamp"].dt.month
     df["year"] = df["order_purchase_timestamp"].dt.year
-    
     return df
 
 df = load_data()
 
 # Sidebar - Filter
 st.sidebar.header("📌 **Filter Data**")
-selected_month = st.sidebar.selectbox("Pilih Bulan", df["order_month"].unique())
 
-# Tambahkan filter kategori produk
-selected_category = st.sidebar.multiselect("Pilih Kategori Produk", df["product_category_name"].unique(), default=df["product_category_name"].unique())
+# Date range filter menggunakan date_input
+date_range = st.sidebar.date_input(
+    "Pilih Rentang Tanggal",
+    [df["order_purchase_timestamp"].min(), df["order_purchase_timestamp"].max()]
+)
 
-# Filter berdasarkan harga pembayaran
-min_price, max_price = st.sidebar.slider("Range Harga Pembayaran (BRL)", float(df["payment_value"].min()), float(df["payment_value"].max()), (float(df["payment_value"].min()), float(df["payment_value"].max())))
+# Default dataframe jika tanggal tidak lengkap
+if isinstance(date_range, list) and len(date_range) == 2:
+    start_date, end_date = pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1])
+    date_filtered_df = df[(df["order_purchase_timestamp"] >= start_date) & (df["order_purchase_timestamp"] <= end_date)]
+else:
+    st.sidebar.warning("Harap pilih dua tanggal untuk melakukan filter.")
+    date_filtered_df = df.copy()  # fallback agar tidak error
 
-# Terapkan filter
-filtered_df = df[(df["order_month"] == selected_month) & 
-                 (df["product_category_name"].isin(selected_category)) & 
-                 (df["payment_value"].between(min_price, max_price))]
+# Filter kategori produk
+selected_category = st.sidebar.multiselect(
+    "Pilih Kategori Produk", 
+    date_filtered_df["product_category_name"].unique(), 
+    default=date_filtered_df["product_category_name"].unique()
+)
+
+# Filter berdasarkan harga
+min_price, max_price = st.sidebar.slider(
+    "Range Harga Pembayaran (BRL)", 
+    float(date_filtered_df["payment_value"].min()), 
+    float(date_filtered_df["payment_value"].max()), 
+    (float(date_filtered_df["payment_value"].min()), float(date_filtered_df["payment_value"].max()))
+)
+
+# Gabungan semua filter
+filtered_df = date_filtered_df[
+    (date_filtered_df["product_category_name"].isin(selected_category)) &
+    (date_filtered_df["payment_value"].between(min_price, max_price))
+]
 
 # ======== SECTION 1: KPI Metrics ========
 st.subheader("📌 **Statistik Utama**")
