@@ -29,7 +29,8 @@ def load_data():
     df["month"] = df["order_purchase_timestamp"].dt.month
     df["year"] = df["order_purchase_timestamp"].dt.year
     return df
-    
+df = load_data()
+
 # Sidebar - Filter
 st.sidebar.header("📌 **Filter Data**")
 
