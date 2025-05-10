@@ -14,15 +14,14 @@ st.title("📊 **E-Commerce Data Dashboard**")
 # Load data
 @st.cache_data
 def load_data():
-    df = pd.read_csv("ecommerce_cleaned_data.csv")
+    url = "https://drive.google.com/uc?id=1yVmRLqssLDDnxPnRGzrjvELuZ4u49Gvx"
+    df = pd.read_csv(url)
     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"])
     df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
     df["month"] = df["order_purchase_timestamp"].dt.month
     df["year"] = df["order_purchase_timestamp"].dt.year
     return df
-
-df = load_data()
-
+    
 # Sidebar - Filter
 st.sidebar.header("📌 **Filter Data**")
 
