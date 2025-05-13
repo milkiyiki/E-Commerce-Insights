@@ -23,7 +23,7 @@ def load_data():
 
     df = pd.read_csv(output)
 
-    # Format waktu yang fleksibel
+    # Lebih fleksibel dan aman
     df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"], errors="coerce")
     df = df.dropna(subset=["order_purchase_timestamp"])
 
@@ -33,7 +33,6 @@ def load_data():
     df["year"] = df["order_purchase_timestamp"].dt.year
     return df
 
-# Load data
 df = load_data()
 
 # Sidebar - Filter
@@ -48,30 +47,30 @@ date_range = st.sidebar.date_input(
 # Pastikan ada dua tanggal yang dipilih
 if isinstance(date_range, list) and len(date_range) == 2:
     start_date, end_date = pd.to_datetime(date_range[0]), pd.to_datetime(date_range[1])
-    date_filtered_df = df[(df["order_purchase_timestamp"] >= start_date) & (df["order_purchase_timestamp"] <= end_date)]
+    df_filtered = df[(df["order_purchase_timestamp"] >= start_date) & (df["order_purchase_timestamp"] <= end_date)]
 else:
     st.sidebar.warning("Harap pilih dua tanggal untuk melakukan filter.")
-    date_filtered_df = df.copy()
+    df_filtered = df
 
 # Filter Kategori Produk
 selected_category = st.sidebar.multiselect(
     "Pilih Kategori Produk",
-    options=date_filtered_df["product_category_name"].unique(),
-    default=date_filtered_df["product_category_name"].unique()
+    df_filtered["product_category_name"].unique(),
+    default=df_filtered["product_category_name"].unique()
 )
 
 # Filter Harga
 min_price, max_price = st.sidebar.slider(
     "Range Harga Pembayaran (BRL)",
-    float(date_filtered_df["payment_value"].min()),
-    float(date_filtered_df["payment_value"].max()),
-    (float(date_filtered_df["payment_value"].min()), float(date_filtered_df["payment_value"].max()))
+    float(df_filtered["payment_value"].min()),
+    float(df_filtered["payment_value"].max()),
+    (float(df_filtered["payment_value"].min()), float(df_filtered["payment_value"].max()))
 )
 
 # Gabungan semua filter
-filtered_df = date_filtered_df[
-    (date_filtered_df["product_category_name"].isin(selected_category)) &
-    (date_filtered_df["payment_value"].between(min_price, max_price))
+filtered_df = df_filtered[
+    (df_filtered["product_category_name"].isin(selected_category)) &
+    (df_filtered["payment_value"].between(min_price, max_price))
 ]
 
 # ======= METRIK UTAMA =======
