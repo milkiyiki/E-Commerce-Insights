@@ -23,8 +23,11 @@ def load_data():
 
     df = pd.read_csv(output)
 
-    # Konversi datetime dengan format eksplisit
-    df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"], format="%m/%d/%Y %H:%M")
+    # Lebih fleksibel dan aman
+    df["order_purchase_timestamp"] = pd.to_datetime(df["order_purchase_timestamp"], errors="coerce")
+    df = df.dropna(subset=["order_purchase_timestamp"])
+
+    # Kolom tambahan
     df["order_month"] = df["order_purchase_timestamp"].dt.strftime("%Y-%m")
     df["month"] = df["order_purchase_timestamp"].dt.month
     df["year"] = df["order_purchase_timestamp"].dt.year
