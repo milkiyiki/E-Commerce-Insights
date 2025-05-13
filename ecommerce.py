@@ -118,14 +118,6 @@ fig = px.bar(top_10_products, x="product_category", y="total_orders", title="Top
 fig.update_layout(xaxis_title="Kategori Produk", yaxis_title="Jumlah Pesanan", xaxis_tickangle=-45)
 st.plotly_chart(fig)
 
-# ======= WORD CLOUD =======
-st.subheader("🔠 **Word Cloud Kategori Produk**")
-wordcloud = WordCloud(width=800, height=400, background_color="white").generate(" ".join(filtered_df["product_category_name"].dropna()))
-fig, ax = plt.subplots(figsize=(12, 6))
-ax.imshow(wordcloud, interpolation="bilinear")
-ax.axis("off")
-st.pyplot(fig)
-
 # ======= HEATMAP KORELASI =======
 st.subheader("📊 **Heatmap Korelasi Data**")
 corr_matrix = filtered_df[["payment_value", "review_score"]].corr()
